@@ -1,8 +1,8 @@
 package main
 
 import (
-	"Assignment-micro-service/api/customer-api/handlers"
-	"Assignment-micro-service/pb"
+	"go-microservices-training/api/customer-api/handlers"
+	"go-microservices-training/pb"
 
 	"net/http"
 

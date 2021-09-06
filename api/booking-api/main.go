@@ -1,8 +1,8 @@
 package main
 
 import (
-	"Assignment-micro-service/api/booking-api/handlers"
-	"Assignment-micro-service/pb"
+	"go-microservices-training/api/booking-api/handlers"
+	"go-microservices-training/pb"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

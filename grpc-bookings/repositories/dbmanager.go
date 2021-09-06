@@ -1,9 +1,9 @@
 package repositories
 
 import (
-	"Assignment-micro-service/database"
-	"Assignment-micro-service/grpc-bookings/models"
 	"context"
+	"go-microservices-training/database"
+	"go-microservices-training/grpc-bookings/models"
 
 	"gorm.io/gorm"
 )

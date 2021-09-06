@@ -1,10 +1,10 @@
 package repositories
 
 import (
-	"Assignment-micro-service/database"
-	"Assignment-micro-service/gprc-customers/models"
-	"Assignment-micro-service/gprc-customers/requests"
 	"context"
+	"go-microservices-training/database"
+	"go-microservices-training/gprc-customers/models"
+	"go-microservices-training/gprc-customers/requests"
 
 	"gorm.io/gorm"
 )

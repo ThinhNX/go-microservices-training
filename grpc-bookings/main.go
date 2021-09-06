@@ -1,11 +1,11 @@
 package main
 
 import (
-	"Assignment-micro-service/grpc-bookings/handlers"
-	"Assignment-micro-service/grpc-bookings/repositories"
-	"Assignment-micro-service/helper"
-	"Assignment-micro-service/pb"
 	"fmt"
+	"go-microservices-training/grpc-bookings/handlers"
+	"go-microservices-training/grpc-bookings/repositories"
+	"go-microservices-training/helper"
+	"go-microservices-training/pb"
 	"net"
 
 	"google.golang.org/grpc"

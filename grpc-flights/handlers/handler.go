@@ -1,11 +1,11 @@
 package handlers
 
 import (
-	"Assignment-micro-service/grpc-flights/models"
-	"Assignment-micro-service/grpc-flights/repositories"
-	"Assignment-micro-service/pb"
 	"context"
 	"database/sql"
+	"go-microservices-training/grpc-flights/models"
+	"go-microservices-training/grpc-flights/repositories"
+	"go-microservices-training/pb"
 
 	"github.com/jinzhu/copier"
 	"google.golang.org/grpc/codes"

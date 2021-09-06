@@ -1,12 +1,12 @@
 package handlers
 
 import (
-	"Assignment-micro-service/gprc-customers/models"
-	"Assignment-micro-service/gprc-customers/repositories"
-	"Assignment-micro-service/gprc-customers/requests"
-	"Assignment-micro-service/pb"
 	"context"
 	"database/sql"
+	"go-microservices-training/gprc-customers/models"
+	"go-microservices-training/gprc-customers/repositories"
+	"go-microservices-training/gprc-customers/requests"
+	"go-microservices-training/pb"
 
 	"github.com/jinzhu/copier"
 	"google.golang.org/grpc/codes"

@@ -1,4 +1,4 @@
-module Assignment-micro-service
+module go-microservices-training
 
 go 1.15
 

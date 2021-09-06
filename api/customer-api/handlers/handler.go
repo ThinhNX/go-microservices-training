@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"Assignment-micro-service/api/customer-api/requests"
-	"Assignment-micro-service/api/customer-api/responses"
-	"Assignment-micro-service/pb"
+	"go-microservices-training/api/customer-api/requests"
+	"go-microservices-training/api/customer-api/responses"
+	"go-microservices-training/pb"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

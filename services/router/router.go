@@ -1,21 +1,58 @@
 package router
+
 import (
 	"go-microservices-training/services/handler"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
-	"log"
 )
-func StartSv(port string) {
-	log.Println("starting sv at localhost, port: ", port)
-	handlerGroup(port)
+
+type Routers struct {
+	Pattern  string
+	Method   string
+	HandlerF func(*gin.Context)
+	Name     string
 }
 
-func handlerGroup(port string) {
-	router := gin.Default()
-	router.SetTrustedProxies([]string{"localhost"})
-	v1Api := router.Group("/v1")
-	v1Api.GET("/customer", handler.CustomerHandler)
-	v1Api.GET("/test", handler.AlwaysBadRequest)
-	addr := "localhost:" + port
-	router.Run(addr)
+func NewHandler() http.Handler {
 
+	RouterList := []Routers{
+		{
+			Pattern:  "/customer",
+			Method:   "GET",
+			HandlerF: handler.CustomerHandler,
+			Name:     "handlerCustomer",
+		},
+		{
+			Pattern:  "/test",
+			Method:   "GET",
+			HandlerF: handler.AlwaysBadRequest,
+			Name:     "handlerTest",
+		},
+	}
+	handler := gin.New()
+	gin.SetMode(gin.ReleaseMode)
+	handler.SetTrustedProxies(nil)
+	handlerGroup := handler.Group("/v1")
+	for _, router := range RouterList {
+		switch router.Method {
+		case http.MethodGet:
+			{
+				handlerGroup.GET(router.Pattern, router.HandlerF)
+			}
+		case http.MethodPost:
+			{
+				handlerGroup.POST(router.Pattern, router.HandlerF)
+			}
+		case http.MethodPut:
+			{
+				handlerGroup.PUT(router.Pattern, router.HandlerF)
+			}
+		case http.MethodDelete:
+			{
+				handlerGroup.DELETE(router.Pattern, router.HandlerF)
+			}
+		}
+	}
+	return handler
 }

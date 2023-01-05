@@ -27,6 +27,6 @@ func StartH2CServer(host string) {
 		Handler: h2c.NewHandler(handler, h2s),
 	}
 
-	log.Printf("Listening [0.0.0.0:8080]...\n")
+	log.Printf("Listening [%s]...\n", host)
 	checkErr(server.ListenAndServe(), "while listening")
 }

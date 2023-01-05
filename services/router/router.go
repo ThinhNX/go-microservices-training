@@ -14,27 +14,33 @@ type Routers struct {
 	Name     string
 }
 
-func NewHandler() http.Handler {
+var routerList = []Routers{
+	{
+		Pattern:  "/customer",
+		Method:   "GET",
+		HandlerF: handler.CustomerHandler,
+		Name:     "handlerCustomer",
+	},
+	{
+		Pattern:  "/test",
+		Method:   "GET",
+		HandlerF: handler.AlwaysBadRequest,
+		Name:     "handlerTest",
+	},
+	{
+		Pattern:  "shoplist",
+		Method:   "GET",
+		HandlerF: handler.GetShopHandler,
+		Name:     "handleShopListGet",
+	},
+}
 
-	RouterList := []Routers{
-		{
-			Pattern:  "/customer",
-			Method:   "GET",
-			HandlerF: handler.CustomerHandler,
-			Name:     "handlerCustomer",
-		},
-		{
-			Pattern:  "/test",
-			Method:   "GET",
-			HandlerF: handler.AlwaysBadRequest,
-			Name:     "handlerTest",
-		},
-	}
+func NewHandler() http.Handler {
 	handler := gin.New()
-	gin.SetMode(gin.ReleaseMode)
+	gin.SetMode(gin.DebugMode)
 	handler.SetTrustedProxies(nil)
 	handlerGroup := handler.Group("/v1")
-	for _, router := range RouterList {
+	for _, router := range routerList {
 		switch router.Method {
 		case http.MethodGet:
 			{

@@ -2,7 +2,10 @@ module go-microservices-training
 
 go 1.17
 
-require github.com/gin-gonic/gin v1.8.1
+require (
+	github.com/gin-gonic/gin v1.8.1
+	golang.org/x/net v0.4.0
+)
 
 require (
 	github.com/gin-contrib/sse v0.1.0 // indirect
@@ -17,8 +20,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.1 // indirect
 	github.com/ugorji/go/codec v1.2.7 // indirect
-	golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97 // indirect
-	golang.org/x/net v0.4.0 // indirect
+	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
 	golang.org/x/sys v0.3.0 // indirect
 	golang.org/x/text v0.5.0 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect

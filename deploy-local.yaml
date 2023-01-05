@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer
+  namespace: local-cluster
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer-app
+  template:
+    metadata:
+      labels:
+        app: customer-app
+    spec:
+      containers:
+      - name: customer-backen
+        image: customer:latest
+        imagePullPolicy: IfNotPresent
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer-entrypoint
+  namespace: local-cluster
+spec:
+  type: LoadBalancer
+  externalIPs:
+  - 192.168.39.22
+  selector:
+    app: customer-app
+  ports:
+  - port: 3000
+    targetPort: 8080
+    nodePort: 30001
+    name: customer

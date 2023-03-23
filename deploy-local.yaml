@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: customer
-  namespace: local-cluster
+  namespace: thinhnx
 spec:
   replicas: 1
   selector:
@@ -22,7 +22,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: customer-entrypoint
-  namespace: local-cluster
+  namespace: thinhnx
 spec:
   type: LoadBalancer
   externalIPs:

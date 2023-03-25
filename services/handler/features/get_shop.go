@@ -1,4 +1,4 @@
-package handler
+package features
 
 import (
 	"go-microservices-training/services/model"

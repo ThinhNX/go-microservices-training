@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: customer-backen
-        image: customer:latest
+        image: customer:v3.1
         imagePullPolicy: IfNotPresent
 ---
 apiVersion: v1

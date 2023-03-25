@@ -1,7 +1,9 @@
 package router
 
 import (
-	"go-microservices-training/services/handler"
+	"go-microservices-training/services/handler/features"
+	"go-microservices-training/services/handler/login"
+
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -18,47 +20,53 @@ var routerList = []Routers{
 	{
 		Pattern:  "/customer",
 		Method:   "GET",
-		HandlerF: handler.CustomerHandler,
-		Name:     "handlerCustomer",
+		HandlerF: features.CustomerHandler,
+		Name:     "featuresCustomer",
 	},
 	{
 		Pattern:  "/test",
 		Method:   "GET",
-		HandlerF: handler.AlwaysBadRequest,
-		Name:     "handlerTest",
+		HandlerF: features.AlwaysBadRequest,
+		Name:     "featuresTest",
 	},
 	{
 		Pattern:  "shoplist",
 		Method:   "GET",
-		HandlerF: handler.GetShopHandler,
+		HandlerF: features.GetShopHandler,
+		Name:     "handleShopListGet",
+	},
+	{
+		Pattern:  "login",
+		Method:   "POST",
+		HandlerF: login.LoginHandler,
 		Name:     "handleShopListGet",
 	},
 }
 
 func NewHandler() http.Handler {
-	handler := gin.New()
+	features := gin.New()
 	gin.SetMode(gin.DebugMode)
-	handler.SetTrustedProxies(nil)
-	handlerGroup := handler.Group("/v1")
+	features.SetTrustedProxies(nil)
+	featuresGroup := features.Group("/v1")
 	for _, router := range routerList {
 		switch router.Method {
 		case http.MethodGet:
 			{
-				handlerGroup.GET(router.Pattern, router.HandlerF)
+				featuresGroup.GET(router.Pattern, router.HandlerF)
 			}
 		case http.MethodPost:
 			{
-				handlerGroup.POST(router.Pattern, router.HandlerF)
+				featuresGroup.POST(router.Pattern, router.HandlerF)
 			}
 		case http.MethodPut:
 			{
-				handlerGroup.PUT(router.Pattern, router.HandlerF)
+				featuresGroup.PUT(router.Pattern, router.HandlerF)
 			}
 		case http.MethodDelete:
 			{
-				handlerGroup.DELETE(router.Pattern, router.HandlerF)
+				featuresGroup.DELETE(router.Pattern, router.HandlerF)
 			}
 		}
 	}
-	return handler
+	return features
 }

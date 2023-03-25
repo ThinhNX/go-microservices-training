@@ -1,4 +1,4 @@
-package handler
+package features
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"

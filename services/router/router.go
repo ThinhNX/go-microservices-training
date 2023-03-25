@@ -3,6 +3,8 @@ package router
 import (
 	"go-microservices-training/services/handler/features"
 	"go-microservices-training/services/handler/login"
+	"go-microservices-training/services/handler/token"
+	"go-microservices-training/services/middleware"
 
 	"net/http"
 
@@ -48,6 +50,9 @@ func NewHandler() http.Handler {
 	gin.SetMode(gin.DebugMode)
 	features.SetTrustedProxies(nil)
 	featuresGroup := features.Group("/v1")
+	getTokenGroup := features.Group("/token")
+	getTokenGroup.GET("/get", token.GetTokenHandler )
+	featuresGroup.Use(middleware.VerifyToken())
 	for _, router := range routerList {
 		switch router.Method {
 		case http.MethodGet:

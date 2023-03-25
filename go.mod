@@ -4,6 +4,7 @@ go 1.17
 
 require (
 	github.com/gin-gonic/gin v1.8.1
+	github.com/kataras/jwt v0.1.8
 	golang.org/x/net v0.4.0
 )
 

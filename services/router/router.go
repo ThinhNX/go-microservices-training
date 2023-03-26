@@ -51,7 +51,7 @@ func NewHandler() http.Handler {
 	features.SetTrustedProxies(nil)
 	featuresGroup := features.Group("/v1")
 	getTokenGroup := features.Group("/token")
-	getTokenGroup.GET("/get", token.GetTokenHandler )
+	getTokenGroup.POST("/get", token.GetTokenHandler )
 	featuresGroup.Use(middleware.VerifyToken())
 	for _, router := range routerList {
 		switch router.Method {

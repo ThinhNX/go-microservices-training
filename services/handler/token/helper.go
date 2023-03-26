@@ -1,15 +1,15 @@
 package token
 
 import (
-	"go-microservices-training/services/model"
 	"io/ioutil"
 	"log"
 	"time"
 
+	"github.com/gin-gonic/gin"
 	"github.com/kataras/jwt"
 )
 
-func createToken() ([]byte, error) {
+func createToken(c *gin.Context) ([]byte, error) {
 	// pubKey, _ := os.ReadFile("public_key.pem")
 	prvKey, errRead := ioutil.ReadFile("private_key.pem")
 	if errRead != nil {
@@ -17,12 +17,15 @@ func createToken() ([]byte, error) {
 		return nil, errRead
 	}
 	prvKeyAfterParse, _ := jwt.ParsePrivateKeyRSA(prvKey)
-
-	payload := model.UserClaims{
-		UserID:     "id thu nghie",
-		UserWaller: "1 ty dong",
+	errParseForm := c.Request.ParseForm()
+	if errParseForm != nil {
+		return nil, errParseForm
 	}
-	token, err := jwt.Sign(jwt.RS256, prvKeyAfterParse, payload, jwt.MaxAge(100*time.Hour))
+	idRequest := c.PostForm("ID")
+	tokenClaims := jwt.Claims{
+		ID: idRequest,
+	}
+	token, err := jwt.Sign(jwt.RS256, prvKeyAfterParse, tokenClaims, jwt.MaxAge(100*time.Hour))
 	if err != nil {
 		log.Default().Println("Sign token err: ", err)
 

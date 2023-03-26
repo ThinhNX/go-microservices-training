@@ -2,7 +2,7 @@ package token
 
 import "github.com/gin-gonic/gin"
 func GetTokenHandler(c *gin.Context) {
-	tokenGen, err := createToken()
+	tokenGen, err := createToken(c)
 	if err != nil {
 		c.Data(500, "text/html", []byte(err.Error()))
 		return

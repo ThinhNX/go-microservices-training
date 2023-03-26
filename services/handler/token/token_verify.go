@@ -20,5 +20,10 @@ func IsTokenValid(token string) bool{
 	}
 	var claims jwt.Claims
 	errDecode := verifiedToken.Claims(&claims)
-	return errDecode == nil
+	if errDecode != nil {
+		return false
+	}
+	if claims.ID == "admin" {
+		return true
+	} else {return false}
 }

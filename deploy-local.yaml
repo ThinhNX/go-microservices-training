@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: customer-backen
-        image: customer:local
+        image: thinhnxhust/customer:local
         imagePullPolicy: IfNotPresent
 ---
 apiVersion: v1

@@ -2,17 +2,19 @@
 
 # Alpine is chosen for its small footprint
 # compared to Ubuntu
-FROM golang:alpine
+FROM golang:alpine as builder
 WORKDIR /app
 
 # Download necessary Go modules
-COPY go.mod ./
-COPY go.sum ./
+ADD go.mod go.sum ./
+RUN go mod download
 COPY . .
-RUN GO111MODULE=on GOOS=linux GOARCH=amd64 go build cmd/main.go
+RUN GO111MODULE=on GOOS=linux GOARCH=amd64 go build -o customer cmd/main.go
+
+FROM alpine
+COPY *.pem .
+COPY --from=builder /app/customer . 
 EXPOSE 8080
-
-CMD ["./main"]
-
+CMD ["./customer"]
 # ... the rest of the Dockerfile is ...
 # ...   omitted from this example   ...

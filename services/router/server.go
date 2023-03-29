@@ -28,5 +28,5 @@ func StartH2CServer(host string) {
 	}
 
 	log.Printf("Listening [%s]...\n", host)
-	checkErr(server.ListenAndServe(), "while listening")
+	go checkErr(server.ListenAndServe(), "while listening")
 }

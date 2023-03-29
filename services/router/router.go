@@ -43,16 +43,28 @@ var routerList = []Routers{
 		HandlerF: login.LoginHandler,
 		Name:     "handleShopListGet",
 	},
+	{
+		Pattern:  "/panic",
+		Method:   "GET",
+		HandlerF: features.PanicSv,
+		Name:     "featuresTest",
+	},
 }
 
 func NewHandler() http.Handler {
-	features := gin.New()
+	feature := gin.New()
 	gin.SetMode(gin.DebugMode)
-	features.SetTrustedProxies(nil)
-	featuresGroup := features.Group("/v1")
-	getTokenGroup := features.Group("/token")
-	getTokenGroup.POST("/get", token.GetTokenHandler )
+	feature.SetTrustedProxies(nil)
+	featuresGroup := feature.Group("/v1")
 	featuresGroup.Use(middleware.VerifyToken())
+
+
+	getTokenGroup := feature.Group("/token")
+	getTokenGroup.POST("/get", token.GetTokenHandler)
+
+
+	panicCheck := feature.Group("/panicCheck", features.PanikCheckMdw())
+	panicCheck.GET("/check", features.GonnaPanicOrNot)
 	for _, router := range routerList {
 		switch router.Method {
 		case http.MethodGet:
@@ -73,5 +85,5 @@ func NewHandler() http.Handler {
 			}
 		}
 	}
-	return features
+	return feature
 }

@@ -1,0 +1,13 @@
+[req]
+default_bits = 2048
+prompt = no
+default_md = sha256
+distinguished_name = dn
+[dn]
+C=VN
+ST=Hanoi
+L=CauGiay
+O=Viettel
+OU=VHT
+emailAddress=xuanthinh.1411@mail.com
+CN = localhost

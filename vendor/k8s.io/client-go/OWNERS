@@ -1,6 +1,7 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
+  - aojea
   - caesarxuchao
   - deads2k
   - liggitt
@@ -15,6 +16,7 @@ reviewers:
   - deads2k
   - jpbetz
   - liggitt
+  - skitt
   - soltysh
   - sttts
   - yliaog
